@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+}
+
+p{
+  font-size: 20px;
+}
+.Hello{
+  font-size: 25px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-zoom infinite 10s linear, App-logo-spin infinite 15s linear;
+  }
+}
+
+.zoom-in{
+  animation-name: App-logo-zoom;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+.Hello{
+  color: rgb(54, 54, 54);
+}
+
+.App-header {
+  min-height: 50px;
+  justify-content: stretch;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+
+  }
+}
+@keyframes App-logo-zoom {
+  from {
+    transform: translate(-700px);
+  }
+  to {
+    transform: translate(0px);
+
+  }
+}
