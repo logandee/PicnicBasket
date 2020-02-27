@@ -5,6 +5,8 @@
     display: inline-block;
 }
 .qty{
-    display: inline;
+    display: inline-block;
     margin: 0px 10px;
+    min-width: 20px;
+    font-size: 22px;
 }

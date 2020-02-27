@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import OrderPage from './components/OrderPage';
 import HomePage from './components/HomePage';
 import SummaryPage from './components/SummaryPage';
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 function App() {
 

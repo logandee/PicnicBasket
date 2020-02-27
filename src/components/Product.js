@@ -6,34 +6,33 @@ class Product extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            product: {
+            item: {
                 name: this.props.name,
                 qty: 0
-            } ,
-            maxAvailable: 10
+            }
         };
 
     }
 
     minusOne = () => {
-        if(this.state.product.qty > 0){
+        if(this.state.item.qty > 0){
             this.setState( prevState =>({
-                product: {
-                    ...prevState.product,
-                    qty: prevState.product.qty - 1
+                item: {
+                    ...prevState.item,
+                    qty: prevState.item.qty - 1
                 }
-            }),() => {this.props.updateProduct(this.state.product)});
+            }),() => {this.props.updateProduct(this.state.item)});
         }
-        this.props.updateProduct(this.state.product);
+        this.props.updateProduct(this.state.item);
     }
     addOne = () => {
-        if(this.state.product.qty < this.state.maxAvailable){
+        if(this.state.item.qty < this.props.inventory){
             this.setState(prevState => ({
-                product: {
-                    ...prevState.product,
-                    qty: prevState.product.qty + 1
+                item: {
+                    ...prevState.item,
+                    qty: prevState.item.qty + 1
                 }
-            }),() => {this.props.updateProduct(this.state.product)});
+            }),() => {this.props.updateProduct(this.state.item)});
         }
     }
 
@@ -44,9 +43,9 @@ class Product extends React.Component{
                 <div className="card-body">
                     <h5 className="card-title">{this.props.name}</h5>
                     <i className="fa-lg fas fa-minus-circle" onClick={this.minusOne}></i>
-                    <p className="qty">{this.state.product.qty}</p>
+                    <p className="qty">{this.state.item.qty}</p>
                     <i className="fa-lg fas fa-plus-circle" onClick={this.addOne}></i>
-                    {/* <button onClick={() => this.props.updateProduct(this.state.product)}>add</button> */}
+                    {/* <button onClick={() => this.props.updateProduct(this.state.item)}>add</button> */}
                 </div>
             </div>
         )

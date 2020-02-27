@@ -1,24 +1,36 @@
 import React from 'react';
 import Product from './Product';
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 export default class OrderPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            items: [],
             products: []
         };
     }
 
-    addOrUpdateProducts = (product) => {
-        for(let i = 0; i < this.state.products.length; i++){
-            if(this.state.products[i].name === product.name){
+    componentDidMount() {
+        this.getProducts();
+      }
+
+    async getProducts() {
+        const response = await fetch('http://localhost:8080/api/product');
+        const data = await response.json();
+        this.setState({ products: data });
+    
+    }
+
+    addOrUpdateProducts = (item) => {
+        for(let i = 0; i < this.state.items.length; i++){
+            if(this.state.items[i].name === item.name){
                 this.setState( prevState =>{
-                    product.qty > 0 ? prevState.products.splice(i,1,product) : prevState.products.splice(i,1);
-                    const products = prevState.products;
+                    item.qty > 0 ? prevState.items.splice(i,1,item) : prevState.items.splice(i,1);
+                    const items = prevState.items;
                     return {
-                        products
+                        items
                     };
 
                 });
@@ -26,30 +38,40 @@ export default class OrderPage extends React.Component{
             }
         }
         this.setState(state => {
-            if(product.qty > 0){
+            if(item.qty > 0){
 
-                const products = state.products.concat(product);
-                console.log(products);
+                const items = state.items.concat(item);
+                console.log(items);
                 return {
-                    products
+                    items
                 };
             }
         });
     }
 
     render(){
+        let productList = this.state.products.map((p) => {
+            return <Product key={p.productId} name={p.name} img={p.description} inventory={p.inventory} updateProduct={(item) => this.addOrUpdateProducts(item)} />;
+        });
         return (
         <div className="orderPage">
+            <div className="d-flex justify-content-between">
+
+            <Link to="/">
+            <button className="btn btn-secondary">
+            Home
+            </button>
+            </Link>
             <Link to="/summary">
-            <button onClick={this.props.setProducts(this.state.products)} className="btn btn-secondary">
+            <button onClick={this.props.setProducts(this.state.items)} className="btn btn-secondary">
             Add to Basket ->
             </button>
             </Link>
+            </div>
             <div className="zoom-in">
                 <h1 className="Hello">Let's add some goods to your basket!</h1>
             </div>
-            <Product name="PB and J" img="PBJ.png" updateProduct={(product) => this.addOrUpdateProducts(product)} />
-            <Product name="Apple" img="apple.png" updateProduct={(product) => this.addOrUpdateProducts(product)} />
+            {productList}
         </div>
         )
     }
