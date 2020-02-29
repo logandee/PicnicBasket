@@ -1,0 +1,18 @@
+version: '3'
+
+services: 
+  api:
+    image: logandee/orderapi
+    build: .
+    ports:
+      - "8080:80"
+  
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypass
+    volumes:
+      - project-data:/var/lib/mysql
+
+volumes:
+  project-data:
