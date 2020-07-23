@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Header from './components/Header';
 import OrderPage from './components/OrderPage';
 import HomePage from './components/HomePage';
 import SummaryPage from './components/SummaryPage';
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Header/>
     <div className="App container">
       <header className="App-header">
 
